@@ -6,6 +6,8 @@
 
 **[直接体验中文](https://nb851224.github.io/future-everyday-pilot/agency/) · [Try in English](https://nb851224.github.io/future-everyday-pilot/agency/?lang=en)**
 
+[本期反馈讨论 / Feedback](https://github.com/nb851224/future-everyday-pilot/issues/2) · [复现说明 / Reproduce](docs/agency/reproduce/README.md)
+
 同样的事实，加入一句虚构偏好，AI会给出什么建议？先盲选，再揭晓。无需登录即可体验；页面不上传选择，没有广告和自动统计。提交公开反馈需要GitHub或Reddit账号。
 
 这次实际运行了12条回答：3个日常场景 × 有无明确偏好 × 每条件2次。全部提示和回答保留，界面固定展示预先指定的第1组、左右随机，另1组完整公开。模型为通过Codex CLI请求的gpt-5.5，使用独立临时会话且没有工具调用。
