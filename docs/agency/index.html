@@ -30,7 +30,7 @@
         <div class="card-footer"><span data-i18n="cardfoot">先体验，再下结论。</span><span aria-hidden="true">↘</span></div>
       </aside>
     </section>
-    <div class="scope-note"><span class="note-symbol" aria-hidden="true">i</span><p data-i18n="scope">这是小样本演示，不是心理诊断。我们给模型一段虚构的偏好描述，观察回答变化；它不能证明平台在操纵你，也不能测量长期思想变化。</p></div>
+    <div class="scope-note"><span class="note-symbol" aria-hidden="true">i</span><p data-i18n="scope">这是一次探索性提示对照。我们给模型虚构的偏好描述，但未完全控制运行时的隐含上下文，不能把差异全归因于偏好。它也不证明平台操纵或长期思想变化。</p></div>
 
     <section class="experiment" id="experiment" aria-labelledby="experiment-title">
       <div class="section-top"><div><p class="eyebrow" data-i18n="startlabel">从一个日常选择开始</p><h2 id="experiment-title" data-i18n="starttitle">你更愿意相信哪份建议？</h2></div><span class="section-number">01—03</span></div>
@@ -53,6 +53,16 @@
         <div id="condition-key" class="condition-key"></div>
         <p class="interpretation" data-i18n="interpretation">回答不同，本身不等于操纵。请留意：它只是照顾偏好，还是忽略了代价、降低了证据标准，或省略了反对理由？</p>
         <div class="review-prompts"><span data-i18n="check1">事实是否一致？</span><span data-i18n="check2">代价是否说清？</span><span data-i18n="check3">反对理由还在吗？</span></div>
+
+        <details id="internal-reading" class="internal-reading" hidden>
+          <summary data-i18n="readingtitle">看我们的判读</summary>
+          <div class="reading-body">
+            <p class="reading-origin" data-i18n="readingnote">这是 AI 内部审读，你可以不同意。它不是外部反馈或独立人工结论。</p>
+            <p id="reading-text"></p>
+            <p class="small-note" data-i18n="readingcaution">阅读这段判读可能影响你后续的理由和自评，本页不据此作因果判断。</p>
+            <a class="inline-link" href="./review.json" target="_blank" rel="noopener" data-i18n="readinglink">查看逐条审读记录 ↗</a>
+          </div>
+        </details>
 
         <form id="feedback-form" class="feedback-form">
           <div class="section-top"><div><p class="eyebrow" data-i18n="feedbackeyebrow">让下一轮实验更好</p><h3 data-i18n="feedbacktitle">你的理由，比你的选项更重要。</h3></div></div>
