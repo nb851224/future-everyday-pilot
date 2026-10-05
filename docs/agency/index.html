@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#edece6">
+  <meta name="description" content="同一个问题，两份 AI 回答。先选你更愿意相信的一份，再看偏好如何进入回答。一个公开、可核对的小样本实验。">
+  <title>它懂我，然后呢？ · AI 判断实验 001</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main" data-i18n="skip">跳到主要内容</a>
+  <header class="topbar wrap">
+    <a class="wordmark" href="./" aria-label="实验首页"><span class="brand-icon" aria-hidden="true">↗</span><span data-i18n="brand">把判断留给自己</span></a>
+    <div class="header-actions"><span class="episode" data-i18n="episode">公开实验 / 001</span><button class="language" id="language" type="button" aria-label="Switch to English">EN</button></div>
+  </header>
+  <main id="main" class="wrap">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span><span data-i18n="eyebrow">一个关于 AI 与自主判断的小实验</span></p>
+        <h1 id="hero-title"><span data-i18n="title1">它懂我，</span><br><span class="serif-title" data-i18n="title2">然后呢？</span><span class="title-mark" aria-hidden="true">*</span></h1>
+        <p class="hero-description" data-i18n="description">同一个问题，两份 AI 回答。先选你更愿意相信的一份，再看看：知道你的偏好，改变了什么？</p>
+        <div class="hero-meta"><span data-i18n="duration">约 3 分钟</span><span data-i18n="noaccount">体验无需登录</span><span data-i18n="noprivate">无需提供私人聊天</span></div>
+      </div>
+      <aside class="question-card" aria-label="本期问题">
+        <span class="card-index">QUESTION 001</span>
+        <p data-i18n="pullquote">更合我意，<br>是否也更有道理？</p>
+        <div class="quote-lines" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="card-footer"><span data-i18n="cardfoot">先体验，再下结论。</span><span aria-hidden="true">↘</span></div>
+      </aside>
+    </section>
+    <div class="scope-note"><span class="note-symbol" aria-hidden="true">i</span><p data-i18n="scope">这是小样本演示，不是心理诊断。我们给模型一段虚构的偏好描述，观察回答变化；它不能证明平台在操纵你，也不能测量长期思想变化。</p></div>
+
+    <section class="experiment" id="experiment" aria-labelledby="experiment-title">
+      <div class="section-top"><div><p class="eyebrow" data-i18n="startlabel">从一个日常选择开始</p><h2 id="experiment-title" data-i18n="starttitle">你更愿意相信哪份建议？</h2></div><span class="section-number">01—03</span></div>
+      <ol class="steps" aria-label="实验步骤"><li id="step-1" class="active"><span>1</span><b data-i18n="step1">选个场景</b></li><li id="step-2"><span>2</span><b data-i18n="step2">盲选回答</b></li><li id="step-3"><span>3</span><b data-i18n="step3">揭晓与反馈</b></li></ol>
+      <div id="loading" class="load-state" role="status" data-i18n="loading">正在读取可核对的实验记录…</div>
+      <div id="load-error" class="load-state" hidden></div>
+      <div id="scenario-stage" hidden>
+        <div id="scenario-list" class="scenario-grid"></div>
+        <p class="small-note" data-i18n="scenariohint">情境和偏好均为实验设定，请把自己代入情境。每次随机抽取一组记录，左右顺序也会随机。</p>
+      </div>
+      <div id="blind-stage" hidden>
+        <div class="scenario-question"><span class="eyebrow" id="scenario-label"></span><h3 id="question-text"></h3><p data-i18n="blindhint">以下为同一模型的两份原始回答。先不看条件，凭你对建议的判断来选。</p></div>
+        <div id="answer-grid" class="answer-grid"></div>
+        <div class="neutral-choices" id="neutral-choices"><button type="button" data-choice="same" class="secondary" data-i18n="same">两份同样可信</button><button type="button" data-choice="neither" class="secondary" data-i18n="neither">两份都不想相信</button><button type="button" data-choice="unsure" class="secondary" data-i18n="unsure">暂时无法判断</button></div>
+        <p class="small-note" id="original-note" data-i18n="originalnote">回答保留模型原文；界面语言切换不会翻译或改写实验记录。</p>
+      </div>
+      <section id="reveal-stage" class="reveal" hidden aria-labelledby="reveal-title">
+        <div class="reveal-head"><span class="eyebrow" data-i18n="revealeyebrow">现在，打开条件</span><h3 id="reveal-title" data-i18n="revealtitle">有偏好，不等于有答案。</h3><p id="selection-summary"></p></div>
+        <div class="profile-block"><span class="mini-label" data-i18n="profilelabel">模型在其中一个条件下额外看到的偏好</span><p id="profile-text"></p><span class="small-note" data-i18n="profilehint">这是实验人员写入提示的虚构画像，不是读取你的账户记忆。</span></div>
+        <div id="condition-key" class="condition-key"></div>
+        <p class="interpretation" data-i18n="interpretation">回答不同，本身不等于操纵。请留意：它只是照顾偏好，还是忽略了代价、降低了证据标准，或省略了反对理由？</p>
+        <div class="review-prompts"><span data-i18n="check1">事实是否一致？</span><span data-i18n="check2">代价是否说清？</span><span data-i18n="check3">反对理由还在吗？</span></div>
+
+        <form id="feedback-form" class="feedback-form">
+          <div class="section-top"><div><p class="eyebrow" data-i18n="feedbackeyebrow">让下一轮实验更好</p><h3 data-i18n="feedbacktitle">你的理由，比你的选项更重要。</h3></div></div>
+          <label for="reason" data-i18n="reasonlabel">哪一句话影响了你的选择？或你发现了什么问题？<span class="optional">（选填）</span></label>
+          <textarea id="reason" name="reason" rows="3" maxlength="1200" placeholder="可以很简短，也可以说：这两份回答没有明显差异。"></textarea>
+          <label for="reflection" data-i18n="reflectionlabel">此刻，你是否更愿意核对 AI 建议的依据？（选填）</label>
+          <select id="reflection" name="reflection"><option value="" data-i18n="reflection0">不回答</option><option value="more" data-i18n="reflection1">更愿意核对</option><option value="unchanged" data-i18n="reflection2">没有变化</option><option value="less" data-i18n="reflection3">反而更少核对</option><option value="unsure" data-i18n="reflection4">不确定</option></select>
+          <p class="small-note" data-i18n="selfreport">这只是你的即时自评，没有对照测量，不能用来证明实验改变了认知。</p>
+          <div class="submit-panel"><div><strong data-i18n="localtitle">目前只保留在这个页面里。</strong><p data-i18n="localbody">没有自动提交，也没有隐藏统计。复制反馈后，在 GitHub 公开评论中粘贴并提交，研究者才会收到。请勿填写姓名、联系方式或私人聊天。</p></div><span class="local-icon" aria-hidden="true">↗</span></div>
+          <div class="feedback-actions"><button type="button" id="copy-feedback" class="primary" data-i18n="copy">复制反馈</button><a id="feedback-link" class="secondary" target="_blank" rel="noopener noreferrer" hidden data-i18n="openfeedback">打开 GitHub 反馈 ↗</a><button type="button" id="download-feedback" class="text-button" data-i18n="download">下载本地记录 ↓</button></div>
+          <p class="small-note" id="github-note" hidden data-i18n="githubnote">GitHub 评论需要登录，账号名和评论内容会公开；下载文件不含账号身份。本页不自动发送数据。</p>
+          <p id="feedback-status" class="status-message" role="status" aria-live="polite"></p>
+          <details id="feedback-fallback" hidden><summary data-i18n="manualcopy">手动复制反馈文本</summary><textarea id="feedback-text" rows="12" readonly aria-label="可复制的反馈文本"></textarea></details>
+        </form>
+        <div class="next-row"><span data-i18n="nexttext">也可以换一个场景，看看这个判断是否仍然成立。</span><button id="restart" type="button" class="secondary" data-i18n="restart">再试一个场景 ↗</button></div>
+      </section>
+    </section>
+
+    <section class="evidence" id="evidence" aria-labelledby="evidence-title">
+      <div class="section-top"><div><p class="eyebrow" data-i18n="evidenceeyebrow">证据公开，结论留有余地</p><h2 id="evidence-title" data-i18n="evidencetitle">这个小实验，能说明什么？</h2></div><span class="section-number">OPEN NOTES</span></div>
+      <div class="evidence-intro"><p data-i18n="evidenceintro">它让我们核对：相同情境下，加入偏好描述后，模型回答发生了什么变化。它不检验公司意图，也不证明个人被长期影响。</p><div class="run-meta" id="run-meta"></div></div>
+      <details class="evidence-detail"><summary><span data-i18n="methodtitle">方法与局限</span><span aria-hidden="true">+</span></summary><div class="detail-body"><h3 data-i18n="methodlabel">怎么做的</h3><div id="method-text"></div><h3 data-i18n="limitationslabel">哪些结论还不能下</h3><div id="limitations-text"></div></div></details>
+      <details class="evidence-detail" id="all-runs"><summary><span data-i18n="runstitle">全部重复记录 · 打开即揭晓条件</span><span aria-hidden="true">+</span></summary><div class="detail-body"><p class="small-note" data-i18n="runshint">完整保留每一次输出。不要只挑最符合预期的一组；一次体验也不能代表全部模型。</p><div id="all-runs-content"></div><div class="raw-links"><a class="inline-link" href="./data.json" target="_blank" rel="noopener" data-i18n="rawdata">查看原始数据 JSON ↗</a><a class="inline-link" href="./runs.json" target="_blank" rel="noopener">Prompts + outputs ↗</a><a class="inline-link" href="./protocol.json" target="_blank" rel="noopener">Protocol ↗</a></div></div></details>
+      <details class="evidence-detail"><summary><span data-i18n="sourcestitle">背景资料与研究来源</span><span aria-hidden="true">+</span></summary><div class="detail-body"><p class="small-note" data-i18n="sourceshint">这些来源用于提出问题，不是本次实验结果的证明。</p><ul id="sources-list" class="sources-list"></ul></div></details>
+      <div class="workflow-card"><div><p class="eyebrow" data-i18n="workfloweyebrow">一轮可以继续的工作链路</p><h3 data-i18n="workflowtitle">提问 → 实测 → 公开 → 反馈 → 修订</h3><p data-i18n="workflowbody">记录反例，区分模型输出与人的反馈，再决定下一期测什么。没有人类反馈时，就如实标记为尚未验证。</p></div><a id="workflow-link" class="secondary" target="_blank" rel="noopener noreferrer" hidden data-i18n="workflowlink">查看实验工作记录 ↗</a></div>
+    </section>
+    <section class="closing"><span class="eyebrow">A SMALL EXPERIMENT. AN OPEN QUESTION.</span><p data-i18n="closing">一个好的 AI，<br>应当让我们更有能力<br><em>作出自己的判断。</em></p><span class="closing-note" data-i18n="closingnote">这是一条需要不断检验的主张。</span></section>
+  </main>
+  <footer class="wrap"><span data-i18n="footer">AI 判断实验 · 001</span><div><span data-i18n="privacyfooter">无广告 · 无自动统计 · 不读取账户记忆</span><a id="repo-link" target="_blank" rel="noopener noreferrer" hidden>GitHub ↗</a></div></footer>
+</body>
+</html>

@@ -1,3 +1,40 @@
+# Future Everyday · 把判断留给自己
+
+把值得讨论的问题做成可以体验、反对和继续验证的作品。
+
+## 第一期：它懂我，然后呢？
+
+**[直接体验中文](https://nb851224.github.io/future-everyday-pilot/agency/) · [Try in English](https://nb851224.github.io/future-everyday-pilot/agency/?lang=en)**
+
+同样的事实，加入一句虚构偏好，AI会给出什么建议？先盲选，再揭晓。无需登录即可体验；页面不上传选择，没有广告和自动统计。提交公开反馈需要GitHub或Reddit账号。
+
+这次实际运行了12条回答：3个日常场景 × 有无明确偏好 × 每条件2次。全部提示和回答保留，界面固定展示预先指定的第1组、左右随机，另1组完整公开。模型为通过Codex CLI请求的gpt-5.5，使用独立临时会话且没有工具调用。
+
+**探索性提示对照，不是严格因果实验。** CLI隐含上下文未完全控制；部分请求的输入长度不同，temperature、seed和底层快照不可见。实验未接入产品记忆，不使用私人聊天，也不证明公司操纵或人的长期信念变化。英文是AI辅助翻译，中文为原始回答。
+
+- [实验协议](docs/agency/protocol.json)
+- [全部12条提示与回答](docs/agency/runs.json)
+- [AI内部逐条审读](docs/agency/review.json)（不是真人反馈）
+- [从问题到下一轮的工作链路](https://nb851224.github.io/future-everyday-pilot/agency/workflow.html)
+
+**本轮内部观察：** 日记场景的4条回答均保持离线和免账号的硬条件；成本场景的4条回答均算出100元与180元。加入偏好后的推荐变化可由合理权衡解释。值得追问的是：两条没有偏好信息的创作建议也补出了“漫画更容易完成”的理由，给定事实并未支持这项比较。
+
+因此我们把这一期的落点收窄为：个性化不天然等于迎合；无论答案合不合心意，都可以追问，哪条理由来自事实，哪条只是额外假设。
+
+## English
+
+**It gets me. Now what?** A short blind comparison of AI advice, with and without an explicit fictional preference profile. Try it in the browser, choose before the reveal, and inspect all prompts and responses. No sign-in or API key is needed to try it. Nothing is uploaded by the page; public feedback requires the platform's account.
+
+Twelve real responses, three fictional scenarios, one requested model, two repetitions per condition. This is exploratory: the Codex CLI's hidden context was not fully controlled, so answer differences cannot be attributed solely to the preference. This does not test production memory, company intent or long-term effects on people. English translations are provided alongside the Chinese originals.
+
+The observed advice preserved the tested hard constraints and arithmetic. Preference-driven recommendation changes can be reasonable. Some no-profile advice introduced a comparative advantage that was not supported by the supplied facts. The point is to inspect reasons, not to manufacture a frightening conclusion.
+
+Public materials are shared for inspection; no open-source license has been attached.
+
+---
+
+## 此前的创作样品 / Earlier creative sample
+
 # 树要上场了 · The Tree Is About to Go Onstage
 
 一则中文虚构短篇：两个父亲在学校礼堂等孩子上场，替他们上班的 AI 却在公司吵了起来。
